@@ -1,7 +1,7 @@
 pipeline {
     agent { label "Jenkins-Agent" }
     environment {
-              APP_NAME = "register-app-pipeline"
+        APP_NAME = "register-app-pipeline"
     }
 
     stages {
@@ -12,9 +12,9 @@ pipeline {
         }
 
         stage("Checkout from SCM"){
-                steps {
-                    git branch: 'main', credentialsId: 'GitHub', url: 'https://github.com/sateesh0584/register-app'
-                }
+            steps {
+                git branch: 'main', credentialsId: 'GitHub', url: 'https://github.com/sateesh0584/register-app'
+            }
         }
 
         stage("Update the Deployment Tags") {
@@ -35,8 +35,8 @@ pipeline {
                    git add deployment.yaml
                    git commit -m "Updated Deployment Manifest"
                 """
-                withCredentials([gitUsernamePassword(credentialsId: GitHub', gitToolName: 'Default')]) {
-                  sh "git push https://github.com/sateesh0584/gitops-register-app main"
+                withCredentials([gitUsernamePassword(credentialsId: 'GitHub', gitToolName: 'Default')]) {
+                    sh "git push https://github.com/sateesh0584/gitops-register-app main"
                 }
             }
         }
